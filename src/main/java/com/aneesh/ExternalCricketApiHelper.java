@@ -51,7 +51,10 @@ public class ExternalCricketApiHelper {
             for (PlayerDto player : playersResponse.getData()) {
                 if (player.getGender().equals(gender)) {
                     int playerAge = calculateAge(player.getDateofbirth(), LocalDate.now());
+                    player.setPlayersAge(playerAge);
+
                     if (playerAge < age) {
+                        
                         filteredPlayers.add(player);
                     }
                 }
