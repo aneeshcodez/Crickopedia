@@ -1,7 +1,10 @@
 package com.aneesh;
 
 
-import com.aneesh.dtos.*;
+import com.aneesh.dtos.Continentsresponse;
+import com.aneesh.dtos.CountriesResponse;
+import com.aneesh.dtos.PlayerDto;
+import com.aneesh.dtos.PlayersResponse;
 import com.aneesh.utilis.OkhttpUtility;
 import com.aneesh.utilis.SecretsHelper;
 
@@ -30,34 +33,15 @@ public class ExternalCricketApiHelper {
     }
 
 
-    private static List<ContinentDto> displayContinents(Continentsresponse continentsresponse) {
-        // Validate API response
-        if (continentsresponse == null || continentsresponse.getContinents() == null || continentsresponse.getContinents().isEmpty()) {
-            System.out.println("No continents found");
-            return null;
-        }
-
-        // Display continents
-        System.out.println("Here's the list of continents you can explore:");
-        List<ContinentDto> continents = continentsresponse.getContinents();
-        for (int i = 0; i < continents.size(); i++) {
-            System.out.println((i + 1) + ". " + continents.get(i).getName());
-        }
-        return continents;
-
-    }
-
     public static CountriesResponse getCountries(int id) {
         try {
             CountriesResponse countriesResponse = OkhttpUtility.getRequest(countriesDomain + id, CountriesResponse.class);
-           return countriesResponse;
+            return countriesResponse;
         } catch (IOException e) {
             System.out.println("Error fetching countries: " + e.getMessage());
             return null;
         }
     }
-
-
 
 
     public static List<PlayerDto> getPlayers(int countriesId, char gender, int age) {
@@ -78,16 +62,13 @@ public class ExternalCricketApiHelper {
             return null;
         }
     }
-    public static int calculateAge(LocalDate birthdate, LocalDate currentDate) {
-        if ((birthdate != null) && (currentDate != null)) {
 
-            return Period.between(birthdate, currentDate).getYears();
-        } else {
+    private static int calculateAge(LocalDate birthdate, LocalDate currentDate) {
+        if ((birthdate == null) || (currentDate == null)) {
             return 0;
         }
+        return Period.between(birthdate, currentDate).getYears();
     }
-
-
 
 
 }

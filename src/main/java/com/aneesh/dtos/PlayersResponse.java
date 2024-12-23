@@ -1,7 +1,6 @@
 package com.aneesh.dtos;
 
 
-
 import lombok.Data;
 
 import java.util.List;

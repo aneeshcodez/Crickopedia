@@ -12,12 +12,6 @@ import java.util.List;
 @RestController
 public class CricketApiController {
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
-
-
     @GetMapping("/continents")
     public Continentsresponse getContinents() {
         return ExternalCricketApiHelper.getAllContinents();
@@ -32,13 +26,10 @@ public class CricketApiController {
     public List<PlayerDto> getPlayersResponse(
             @RequestParam(value = "countriesId") int countriesId,
             @RequestParam(value = "gender") char gender,
-            @RequestParam(value = "age") int age){
+            @RequestParam(value = "age") int age) {
         return ExternalCricketApiHelper.getPlayers(countriesId, gender, age);
     }
 
 
-
 }
 
-// TO DO
-// AGE LESS THAN 30
