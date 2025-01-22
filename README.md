@@ -5,4 +5,3 @@ This app uses CRICKET MONKS API.
 # Pre-requisites:
 1. Cricket Monks account
 
-```
